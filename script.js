@@ -1,3 +1,18 @@
+//biblioteca e código de terceiros
+const formatador = (data) => {
+    return {
+        dia: {
+            numerico: dayjs(data).format('DD'),
+            semana: {
+                curto: dayjs(data).format('ddd'),
+                longo: dayjs(data).format('dddd'),
+            }
+        },
+        mes: dayjs(data).format('MMMM'),
+        hora: dayjs(data).format('HH:mm')
+    }
+}
+
 //object
 const atividade = {
     nome: 'Almoço',
@@ -6,7 +21,7 @@ const atividade = {
 }
 
 //lista, array, vetor []
-const atividades = [
+let atividades = [
     atividade,
     {
         nome: 'Academia em grupo',
@@ -19,6 +34,8 @@ const atividades = [
         finalizada: true
     },
 ]
+
+// atividades = []
 
 
 //arrow function
@@ -41,11 +58,21 @@ const criarItemDeAtividade = (atividade) => {
     `
 }
 
+const atualizarListaDeAtividades = () => {
+    const section = document.querySelector("section")
 
-const section = document.querySelector("section")
+    //verificar se minha lista está vazia
+    if(atividades.length == 0) {
+        section.innerHTML = `<p>Nenhuma atividade cadastrada.</p>`
+        return
+    }
 
-for(let atividade of atividades) {
+    for(let atividade of atividades) {
     section.innerHTML += criarItemDeAtividade(atividade)
+    }
 }
+
+atualizarListaDeAtividades()
+
 
 
